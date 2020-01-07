@@ -39,7 +39,7 @@ public class ContentPaneEx extends JFrame implements ActionListener {
 		// contentPane을 넣어라. set
 		setContentPane(contentPane);
 		// 중앙 위치에 간격 5
-		contentPane.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5)); 
+		contentPane.setLayout(new FlowLayout(FlowLayout.CENTER, 20, 20)); 
 		
 		btnOK = new JButton("OK");
 		btnOK.addActionListener(this);
