@@ -1,17 +1,16 @@
 package java_swing_study.chap09.layout;
 
-import java.awt.BorderLayout;
-import java.awt.EventQueue;
+import java.awt.Color;
+import java.awt.Font;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
-import javax.swing.JPanel;
-import javax.swing.border.EmptyBorder;
 import javax.swing.JLabel;
-import java.awt.Font;
-import java.awt.Color;
+import javax.swing.JPanel;
 import javax.swing.SwingConstants;
+import javax.swing.border.EmptyBorder;
 
+@SuppressWarnings("serial")
 public class AbsoluteLayoutEx extends JFrame {
 
 	private JPanel contentPane;

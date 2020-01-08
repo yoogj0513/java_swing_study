@@ -1,14 +1,13 @@
 package java_swing_study.chap09.layout;
 
-import java.awt.BorderLayout;
+import java.awt.GridLayout;
 
 import javax.swing.JFrame;
-import javax.swing.JPanel;
-import javax.swing.border.EmptyBorder;
-import java.awt.GridLayout;
 import javax.swing.JLabel;
+import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
+import javax.swing.border.EmptyBorder;
 
 @SuppressWarnings("serial")
 public class GridLayoutEx extends JFrame {
