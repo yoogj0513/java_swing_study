@@ -11,16 +11,25 @@ import javax.swing.JPanel;
 import javax.swing.border.TitledBorder;
 
 import java_swing_study.chap09.layout.openchallange.OpenChallengeEx;
+import javax.swing.UIManager;
+import java.awt.Color;
 
 @SuppressWarnings("serial")
 public class LayoutMain extends JFrame implements ActionListener {
 
 	private JPanel contentPane;
-	private JButton btnFlowLayout;
-	private JButton btnBorderLayout;
-	private JButton btnGridLayout;
-	private JButton btnAbsoluteLayout;
+	private JPanel pleft;
+	private JButton btnFlow;
+	private JButton btnBorder;
+	private JButton btnGrid;
+	private JButton btnAbsolute;
 	private JButton btnOpenChallenge;
+	private JPanel pright;
+	private JButton btnExam02;
+	private JButton btnExam04;
+	private JButton btnExam05;
+	private JButton btnExam07;
+	private JButton btnExam08;
 
 	/**
 	 * Launch the application.
@@ -51,66 +60,51 @@ public class LayoutMain extends JFrame implements ActionListener {
 		setLocation(100, 100);
 //		setBounds(100, 100, 450, 107);
 		contentPane = new JPanel();
-		contentPane.setBorder(new TitledBorder(null, "레아이웃 예제", TitledBorder.LEADING, TitledBorder.TOP, null, null));
+		contentPane.setBorder(new TitledBorder(UIManager.getBorder("TitledBorder.border"), "\uC81C09\uC7A5 GUI \uAE30\uCD08", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
 		setContentPane(contentPane);
 		contentPane.setLayout(new GridLayout(0, 2, 10, 10));
 		
-		btnFlowLayout = new JButton("FlowLayout");
-		btnFlowLayout.addActionListener(this);
-		contentPane.add(btnFlowLayout);
+		pleft = new JPanel();
+		pleft.setBorder(new TitledBorder(null, "\uB808\uC774\uC544\uC6C3 \uC608\uC81C", TitledBorder.LEADING, TitledBorder.TOP, null, null));
+		contentPane.add(pleft);
+		pleft.setLayout(new GridLayout(0, 2, 10, 10));
 		
-		btnBorderLayout = new JButton("BorderLayout");
-		btnBorderLayout.addActionListener(this);
-		contentPane.add(btnBorderLayout);
+		btnFlow = new JButton("FlowLayout");
+		pleft.add(btnFlow);
 		
-		btnGridLayout = new JButton("GridLayout");
-		btnGridLayout.addActionListener(this);
-		contentPane.add(btnGridLayout);
+		btnBorder = new JButton("BorderLayout");
+		pleft.add(btnBorder);
 		
-		btnAbsoluteLayout = new JButton("AbsoluteLayout");
-		btnAbsoluteLayout.addActionListener(this);
-		contentPane.add(btnAbsoluteLayout);
+		btnGrid = new JButton("GridLayout");
+		pleft.add(btnGrid);
+		
+		btnAbsolute = new JButton("AbsoluteLayout");
+		pleft.add(btnAbsolute);
 		
 		btnOpenChallenge = new JButton("OpenChallenge");
-		btnOpenChallenge.addActionListener(this);
-		contentPane.add(btnOpenChallenge);
+		pleft.add(btnOpenChallenge);
+		
+		pright = new JPanel();
+		pright.setBorder(new TitledBorder(null, "\uC2E4\uC2B5\uBB38\uC81C \uD480\uC774", TitledBorder.LEADING, TitledBorder.TOP, null, null));
+		contentPane.add(pright);
+		pright.setLayout(new GridLayout(0, 2, 10, 10));
+		
+		btnExam02 = new JButton("New button");
+		pright.add(btnExam02);
+		
+		btnExam04 = new JButton("New button");
+		pright.add(btnExam04);
+		
+		btnExam05 = new JButton("New button");
+		pright.add(btnExam05);
+		
+		btnExam07 = new JButton("New button");
+		pright.add(btnExam07);
+		
+		btnExam08 = new JButton("New button");
+		pright.add(btnExam08);
 	}
 
 	public void actionPerformed(ActionEvent e) {
-		if (e.getSource() == btnOpenChallenge) {
-			btnOpenChallengeActionPerformed(e);
-		}
-		if (e.getSource() == btnAbsoluteLayout) {
-			btnAbsoluteLayoutActionPerformed(e);
-		}
-		if (e.getSource() == btnGridLayout) {
-			btnGridLayoutActionPerformed(e);
-		}
-		if (e.getSource() == btnBorderLayout) {
-			btnBorderLayoutActionPerformed(e);
-		}
-		if (e.getSource() == btnFlowLayout) {
-			btnFlowLayoutActionPerformed(e);
-		}
-	}
-	protected void btnFlowLayoutActionPerformed(ActionEvent e) {
-		FlowLayoutEx frame = new FlowLayoutEx();
-		frame.setVisible(true);
-	}
-	protected void btnBorderLayoutActionPerformed(ActionEvent e) {
-		BorderLayoutEx frame = new BorderLayoutEx();
-		frame.setVisible(true);
-	}
-	protected void btnGridLayoutActionPerformed(ActionEvent e) {
-		GridLayoutEx frame = new GridLayoutEx();
-		frame.setVisible(true);
-	}
-	protected void btnAbsoluteLayoutActionPerformed(ActionEvent e) {
-		AbsoluteLayoutEx frame = new AbsoluteLayoutEx();
-		frame.setVisible(true);
-	}
-	protected void btnOpenChallengeActionPerformed(ActionEvent e) {
-		OpenChallengeEx frame = new OpenChallengeEx();
-		frame.setVisible(true);
 	}
 }
