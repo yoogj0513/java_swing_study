@@ -10,6 +10,11 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.TitledBorder;
 
+import java_swing_study.chap09.layout.exam.Exam02BorderLayout;
+import java_swing_study.chap09.layout.exam.Exam04GridLayout;
+import java_swing_study.chap09.layout.exam.Exam05GridLayout;
+import java_swing_study.chap09.layout.exam.Exam07OpenChallenge;
+import java_swing_study.chap09.layout.exam.Exam08OpenChallenge;
 import java_swing_study.chap09.layout.openchallange.OpenChallengeEx;
 import javax.swing.UIManager;
 import java.awt.Color;
@@ -89,22 +94,62 @@ public class LayoutMain extends JFrame implements ActionListener {
 		contentPane.add(pright);
 		pright.setLayout(new GridLayout(0, 2, 10, 10));
 		
-		btnExam02 = new JButton("New button");
+		btnExam02 = new JButton("Exam02");
+		btnExam02.addActionListener(this);
 		pright.add(btnExam02);
 		
-		btnExam04 = new JButton("New button");
+		btnExam04 = new JButton("Exam04");
+		btnExam04.addActionListener(this);
 		pright.add(btnExam04);
 		
-		btnExam05 = new JButton("New button");
+		btnExam05 = new JButton("Exam05");
+		btnExam05.addActionListener(this);
 		pright.add(btnExam05);
 		
-		btnExam07 = new JButton("New button");
+		btnExam07 = new JButton("Exam07");
+		btnExam07.addActionListener(this);
 		pright.add(btnExam07);
 		
-		btnExam08 = new JButton("New button");
+		btnExam08 = new JButton("Exam08");
+		btnExam08.addActionListener(this);
 		pright.add(btnExam08);
 	}
 
 	public void actionPerformed(ActionEvent e) {
+		if (e.getSource() == btnExam08) {
+			btnExam08ActionPerformed(e);
+		}
+		if (e.getSource() == btnExam07) {
+			btnExam07ActionPerformed(e);
+		}
+		if (e.getSource() == btnExam05) {
+			btnExam05ActionPerformed(e);
+		}
+		if (e.getSource() == btnExam04) {
+			btnExam04ActionPerformed(e);
+		}
+		if (e.getSource() == btnExam02) {
+			btnExam02ActionPerformed(e);
+		}
+	}
+	protected void btnExam02ActionPerformed(ActionEvent e) {
+		Exam02BorderLayout frame = new Exam02BorderLayout();
+		frame.setVisible(true);
+	}
+	protected void btnExam04ActionPerformed(ActionEvent e) {
+		Exam04GridLayout frame = new Exam04GridLayout();
+		frame.setVisible(true);
+	}
+	protected void btnExam05ActionPerformed(ActionEvent e) {
+		Exam05GridLayout frame = new Exam05GridLayout();
+		frame.setVisible(true);
+	}
+	protected void btnExam07ActionPerformed(ActionEvent e) {
+		Exam07OpenChallenge frame = new Exam07OpenChallenge();
+		frame.setVisible(true);
+	}
+	protected void btnExam08ActionPerformed(ActionEvent e) {
+		Exam08OpenChallenge frame = new Exam08OpenChallenge();
+		frame.setVisible(true);
 	}
 }

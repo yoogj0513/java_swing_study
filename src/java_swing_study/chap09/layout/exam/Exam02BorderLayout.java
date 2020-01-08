@@ -8,7 +8,7 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
 @SuppressWarnings("serial")
-public class Exam01BorderLayout extends JFrame {
+public class Exam02BorderLayout extends JFrame {
 
 	private JPanel contentPane;
 	private JButton btnNorth;
@@ -20,7 +20,7 @@ public class Exam01BorderLayout extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public Exam01BorderLayout() {
+	public Exam02BorderLayout() {
 		initialize();
 	}
 	private void initialize() {
