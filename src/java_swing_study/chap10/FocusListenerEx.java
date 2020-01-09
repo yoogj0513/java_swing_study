@@ -38,6 +38,7 @@ public class FocusListenerEx extends JFrame {
 	private JLabel lblConfirm;
 	private JButton btnOk;
 	private JButton btnCancel;
+	private JButton btnStdSet;
 
 	public FocusListenerEx() {
 		initialize();
@@ -210,6 +211,10 @@ public class FocusListenerEx extends JFrame {
 			}
 		});
 		contentPane.add(btnCancel);
+		
+		btnStdSet = new JButton("학생정보");
+		btnStdSet.addActionListener(new MyAction4Listener2(tfName, tfNo, tfDept, tfSubj));
+		contentPane.add(btnStdSet);
 	}
 	
 	public JTextField getTfSubj() {
