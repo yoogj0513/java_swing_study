@@ -63,6 +63,8 @@ public class GridLayoutEx extends JFrame {
 		contentPane.add(lblSubj);
 		
 		tfSubj = new JTextField();
+		tfSubj.setFocusable(true);
+		tfSubj.requestFocus();
 		tfSubj.setColumns(10);
 		contentPane.add(tfSubj);
 	}

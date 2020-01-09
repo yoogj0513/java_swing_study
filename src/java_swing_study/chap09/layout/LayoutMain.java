@@ -78,18 +78,23 @@ public class LayoutMain extends JFrame implements ActionListener {
 		pleft.setLayout(new GridLayout(0, 2, 10, 10));
 		
 		btnFlow = new JButton("FlowLayout");
+		btnFlow.addActionListener(this);
 		pleft.add(btnFlow);
 		
 		btnBorder = new JButton("BorderLayout");
+		btnBorder.addActionListener(this);
 		pleft.add(btnBorder);
 		
 		btnGrid = new JButton("GridLayout");
+		btnGrid.addActionListener(this);
 		pleft.add(btnGrid);
 		
 		btnAbsolute = new JButton("AbsoluteLayout");
+		btnAbsolute.addActionListener(this);
 		pleft.add(btnAbsolute);
 		
 		btnOpenChallenge = new JButton("OpenChallenge");
+		btnOpenChallenge.addActionListener(this);
 		pleft.add(btnOpenChallenge);
 		
 		pright = new JPanel();
@@ -128,7 +133,22 @@ public class LayoutMain extends JFrame implements ActionListener {
 	}
 
 	public void actionPerformed(ActionEvent e) {
-		System.out.println(e.getSource());
+		if (e.getSource() == btnOpenChallenge) {
+			btnOpenChallengeActionPerformed(e);
+		}
+		if (e.getSource() == btnAbsolute) {
+			btnAbsoluteActionPerformed(e);
+		}
+		if (e.getSource() == btnBorder) {
+			btnBorderActionPerformed(e);
+		}
+		if (e.getSource() == btnFlow) {
+			btnFlowActionPerformed(e);
+		}
+		if (e.getSource() == btnGrid) {
+			btnGridActionPerformed(e);
+		}
+//		System.out.println(e.getSource());
 		//JOptionPane.showMessageDialog(null, e.getSource());
 		
 		if (e.getSource() == btnExam08) {
@@ -165,6 +185,26 @@ public class LayoutMain extends JFrame implements ActionListener {
 	}
 	protected void btnExam08ActionPerformed(ActionEvent e) {
 		Exam08OpenChallenge frame = new Exam08OpenChallenge();
+		frame.setVisible(true);
+	}
+	protected void btnGridActionPerformed(ActionEvent e) {
+		GridLayoutEx frame = new GridLayoutEx();
+		frame.setVisible(true);
+	}
+	protected void btnFlowActionPerformed(ActionEvent e) {
+		FlowLayoutEx frame = new FlowLayoutEx();
+		frame.setVisible(true);
+	}
+	protected void btnBorderActionPerformed(ActionEvent e) {
+		BorderLayoutEx frame = new BorderLayoutEx();
+		frame.setVisible(true);
+	}
+	protected void btnAbsoluteActionPerformed(ActionEvent e) {
+		AbsoluteLayoutEx frame = new AbsoluteLayoutEx();
+		frame.setVisible(true);
+	}
+	protected void btnOpenChallengeActionPerformed(ActionEvent e) {
+		OpenChallengeEx frame = new OpenChallengeEx();
 		frame.setVisible(true);
 	}
 }
