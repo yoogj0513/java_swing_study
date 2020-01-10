@@ -7,13 +7,6 @@ public class Student {
 	private int stdNo;
 	private String dept;
 	private String subj;
-	
-	public Student() {
-		this.name = "학생이름";
-		this.stdNo = 1234;
-		this.dept = "학과";
-		this.subj = "과목";
-	}
 
 	public Student(String name, int stdNo, String dept, String subj) {
 		this.name = name;
