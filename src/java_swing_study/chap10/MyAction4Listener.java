@@ -23,10 +23,10 @@ public class MyAction4Listener implements ActionListener {
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		JButton btn = (JButton) e.getSource();
-		String name = tfName.getText();
-		int stdNo = Integer.parseInt(tfNo.getText());
-		String dept = tfDept.getText();
-		String subj = tfSubj.getText();
+		String name = tfName.getText().trim();
+		int stdNo = Integer.parseInt(tfNo.getText().trim());
+		String dept = tfDept.getText().trim();
+		String subj = tfSubj.getText().trim();
 		Student std = new Student(name, stdNo, dept, subj);
 		JOptionPane.showMessageDialog(null, std);
 	}

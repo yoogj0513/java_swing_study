@@ -212,7 +212,7 @@ public class FocusListenerEx extends JFrame {
 		});
 		contentPane.add(btnCancel);
 		
-		btnStdSet = new JButton("학생정보");
+		btnStdSet = new JButton("수정");
 		btnStdSet.addActionListener(new MyAction4Listener2(tfName, tfNo, tfDept, tfSubj));
 		contentPane.add(btnStdSet);
 	}

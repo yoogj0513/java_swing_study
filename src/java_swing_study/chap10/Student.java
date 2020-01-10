@@ -15,11 +15,6 @@ public class Student {
 		this.subj = subj;
 	}	
 
-	@Override
-	public String toString() {
-		return String.format("학생정보 %n 이름 : %s%n 학번 : %s%n 학과 : %s%n 과목 : %s", name, stdNo, dept, subj);
-	}
-
 	public String getName() {
 		return name;
 	}
@@ -36,5 +31,9 @@ public class Student {
 		return subj;
 	}
 	
-	
+	@Override
+	public String toString() {
+		return String.format("학생정보 %n 이름 : %s%n 학번 : %s%n 학과 : %s%n 과목 : %s", name, stdNo, dept, subj);
+	}
+
 }
