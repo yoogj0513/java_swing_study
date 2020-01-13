@@ -14,6 +14,7 @@ import java.awt.event.ActionListener;
 import javax.swing.border.TitledBorder;
 import javax.swing.UIManager;
 import java.awt.Color;
+import java.awt.Component;
 import java.awt.Container;
 import java.awt.FlowLayout;
 import javax.swing.JButton;
@@ -126,7 +127,6 @@ public class JComponentEx extends JFrame implements ActionListener, ContainerLis
 	}
 
 	protected void btn4ActionPerformed(ActionEvent e) {
-		JOptionPane.showMessageDialog(null, "버튼추가");
 		JButton btn = new JButton("AddBtn");
 		btn.addActionListener(new ActionListener() {
 			
@@ -175,16 +175,7 @@ public class JComponentEx extends JFrame implements ActionListener, ContainerLis
 			}
 		});
 		pRight.add(btn);
-		pRight.revalidate();
-		pRight.repaint();
-	}
-
-	protected void btn5ActionPerformed(ActionEvent e) {
-		JOptionPane.showMessageDialog(null, "버튼 삭제");
-		Container c = pRight;
-		c.removeAll();
-		c.revalidate();
-		c.repaint();
+		revalidate();
 	}
 
 	public void componentAdded(ContainerEvent e) {
@@ -194,10 +185,23 @@ public class JComponentEx extends JFrame implements ActionListener, ContainerLis
 	}
 
 	public void componentRemoved(ContainerEvent e) {
-
+		JOptionPane.showMessageDialog(null, "버튼이 삭제되었습니다");
 	}
 
 	protected void pRightComponentAdded(ContainerEvent e) {
-
+		JOptionPane.showMessageDialog(null, "버튼이 추가되었습니다");
+	}
+	
+	protected void btn5ActionPerformed(ActionEvent e) {
+		for(Component c : pRight.getComponents()) {
+			pRight.remove(c);
+			revalidate();
+			repaint();
+		}
+		
+//		Container c = pRight;
+//		c.removeAll();
+//		c.revalidate();
+//		c.repaint();
 	}
 }
