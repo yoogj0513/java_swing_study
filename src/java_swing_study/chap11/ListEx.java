@@ -24,11 +24,13 @@ import javax.swing.event.ListSelectionEvent;
 import javax.swing.BoxLayout;
 import javax.swing.ImageIcon;
 import javax.swing.JScrollPane;
+import javax.swing.JTextField;
 
 public class ListEx extends JFrame implements ActionListener, ListSelectionListener {
 
 	private JPanel contentPane;
 	private ArrayList<String> listFruits;
+	private ArrayList<ImageIcon> listImg;
 	
 	private JPanel p1;
 	private JPanel pBtns1;
@@ -43,12 +45,11 @@ public class ListEx extends JFrame implements ActionListener, ListSelectionListe
 	private JButton btnOk2;
 	private JButton btnSet2;
 	
-	private ImageIcon [] image = {
-		new ImageIcon("images/icon1.png"),	
-		new ImageIcon("images/icon2.png"),	
-		new ImageIcon("images/icon3.png"),	
-		new ImageIcon("images/icon4.png"),	
-	};
+	private JPanel p3;
+	private JTextField tf;
+	private JList<String> list ;
+	
+	private ArrayList<String> v;
 	
 
 	public static void main(String[] args) {
@@ -80,6 +81,15 @@ public class ListEx extends JFrame implements ActionListener, ListSelectionListe
 		listFruits.add("berry");
 		listFruits.add("strawberry");
 		listFruits.add("blackberry");
+		
+		String imgDirPath = System.getProperty("user.dir") + "\\images\\";
+		listImg = new ArrayList<ImageIcon>();
+		listImg.add(new ImageIcon(imgDirPath + "icon1.png"));
+		listImg.add(new ImageIcon(imgDirPath + "icon2.png"));
+		listImg.add(new ImageIcon(imgDirPath + "icon3.png"));
+		listImg.add(new ImageIcon(imgDirPath + "icon4.png"));
+		
+		v = new ArrayList<String>();
 	}
 	private void initialize() {
 		setTitle("JList & JCombobox");
@@ -134,13 +144,35 @@ public class ListEx extends JFrame implements ActionListener, ListSelectionListe
 		p2.add(scrollPane, BorderLayout.CENTER);
 		
 		imgList = new JList<ImageIcon>();
-		imgList.setListData(image);
 		scrollPane.add(imgList);
 		
 		scrollPane.setViewportView(imgList);
+		
+		p3 = new JPanel();
+		contentPane.add(p3);
+		p3.setLayout(new BoxLayout(p3, BoxLayout.Y_AXIS));
+		
+		tf = new JTextField();
+		tf.addActionListener(this);
+		p3.add(tf);
+		tf.setColumns(10);
+		
+		
+		JPanel panel_1 = new JPanel();
+		p3.add(panel_1);
+		panel_1.setLayout(new BorderLayout(0, 0));
+		
+		JScrollPane scrollPane_1 = new JScrollPane();
+		panel_1.add(scrollPane_1);
+		
+		list = new JList<>(new Vector<>(v));
+		scrollPane_1.setViewportView(list);
 	}
 
 	public void actionPerformed(ActionEvent e) {
+		if (e.getSource() == tf) {
+			tfActionPerformed(e);
+		}
 		if (e.getSource() == btnOk2) {
 			btnOk2ActionPerformed(e);
 		}
@@ -170,8 +202,14 @@ public class ListEx extends JFrame implements ActionListener, ListSelectionListe
 		strList.setSelectedIndex(listFruits.indexOf("peach"));	
 	}
 	protected void btnOk2ActionPerformed(ActionEvent e) {
-		int index = imgList.getSelectedIndex();
+//		int index = imgList.getSelectedIndex();
+//		System.out.println(image[index]);
+	}
+	protected void tfActionPerformed(ActionEvent e) {
+		String newStr = tf.getText().trim();
+		v.add(newStr);
 		
-		System.out.println(image[index]);
+		list.setListData(new Vector<>(v));
+		tf.setText("");
 	}
 }
