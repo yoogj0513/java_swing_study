@@ -1,5 +1,7 @@
 package java_swing_study.chap11.exam;
 
+import javax.swing.JOptionPane;
+
 public class Student{
 	private int stdNo;
 	private String stdName;
@@ -74,5 +76,25 @@ public class Student{
 		return String.format("[%2d %-10s %3d %3d %3d %3d %.2f]", stdNo, stdName, kor, math, eng, total(), avg());
 	}
 
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + stdNo;
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (obj == null)
+			return false;
+		
+		Student other = (Student) obj;
+		if (stdNo != other.stdNo)
+			return false;
+		return true;
+	}
+
+	
 	
 }
