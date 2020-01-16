@@ -1,6 +1,6 @@
 package java_swing_study.chap11.exam;
 
-public class Student {
+public class Student{
 	private int stdNo;
 	private String stdName;
 	private int kor;
@@ -74,4 +74,5 @@ public class Student {
 		return String.format("[%2d %-10s %3d %3d %3d %3d %.2f]", stdNo, stdName, kor, math, eng, total(), avg());
 	}
 
+	
 }
