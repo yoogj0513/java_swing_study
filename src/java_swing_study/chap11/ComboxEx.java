@@ -236,18 +236,19 @@ public class ComboxEx extends JFrame implements ActionListener {
 	}
 
 	protected void btnSearchActionPerformed(ActionEvent e) {
-		try {
-			int searchNo = Integer.parseInt(tfNum.getText().trim());
-			Student s = new Student(searchNo);
-			Student findStd = std.get(std.indexOf(s));
-			
-			student.setSelectedItem(findStd);
-		} catch (NumberFormatException e1) {
-			JOptionPane.showMessageDialog(null, "번호를 입력해주세요.");
-		} catch (ArrayIndexOutOfBoundsException e2) {
-			JOptionPane.showMessageDialog(null, "해당 학생이 없습니다.");
-		}
+		int searchNo = Integer.parseInt(tfNum.getText());
 		
+		Iterator<Student> it = std.iterator();
+		
+		while(it.hasNext()) {
+			Student n = it.next();
+			int num = n.getStdNo();
+			
+			if(num == searchNo) {
+				System.out.println(n);
+				System.out.println();
+			}
+		}
 		
 	}
 }
