@@ -73,7 +73,7 @@ public class Student{
 
 	@Override
 	public String toString() {
-		return String.format("[%2d %-10s %3d %3d %3d %3d %.2f]", stdNo, stdName, kor, math, eng, total(), avg());
+		return String.format("학생번호:%2d / 학생이름:%s / 국어:%3d / 수학:%3d / 영어:%3d / 총점:%3d / 평균:%.2f", stdNo, stdName, kor, math, eng, total(), avg());
 	}
 
 	@Override

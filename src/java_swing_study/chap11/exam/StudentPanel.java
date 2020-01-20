@@ -20,11 +20,7 @@ public class StudentPanel extends AbsItemPanel<Student> {
 	private JLabel lblMath;
 	private JTextField tfEng;
 
-	/**
-	 * Create the panel.
-	 */
 	public StudentPanel() {
-
 		initialize();
 	}
 	private void initialize() {
@@ -95,7 +91,7 @@ public class StudentPanel extends AbsItemPanel<Student> {
 		tfStdNo.setText(item.getStdNo()+"");
 		tfStdName.setText(item.getStdName());
 		tfKor.setText(item.getKor()+"");
-		tfMath.setText(item.getKor()+"");
+		tfMath.setText(item.getMath()+"");
 		tfEng.setText(item.getEng()+"");
 	}
 }

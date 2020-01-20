@@ -61,6 +61,7 @@ public class StudentTblPanel extends JPanel {
 		stds.add(new Student(1, "서현진", 80, 90, 70));
 		stds.add(new Student(2, "이성경", 90, 90, 40));
 		stds.add(new Student(3, "이유영", 50, 50, 60));
+		//new Student(stdNo, stdName, kor, math, eng)
 		loadData(stds);
 		
 	}
@@ -169,7 +170,7 @@ public class StudentTblPanel extends JPanel {
 		model.addRow(toArray(std));
 	}
 
-	private int getSelectedRowIdx() {
+	public int getSelectedRowIdx() {
 		int selectedIdx = table.getSelectedRow();
 		if(selectedIdx == -1) {
 			// Exception을 쓸 경우 throws 설정이 번거로운편
@@ -186,8 +187,8 @@ public class StudentTblPanel extends JPanel {
 		int stdNo = Integer.parseInt((String)model.getValueAt(selectedIdx, 0));
 		String stdName = (String) model.getValueAt(selectedIdx, 1);
 		int kor = (int) model.getValueAt(selectedIdx, 2);
-		int math = (int) model.getValueAt(selectedIdx, 3);
-		int eng = (int) model.getValueAt(selectedIdx, 4);
+		int eng = (int) model.getValueAt(selectedIdx, 3);
+		int math = (int) model.getValueAt(selectedIdx, 4);
 		return new Student(stdNo, stdName, kor, math, eng);
 	}
 	

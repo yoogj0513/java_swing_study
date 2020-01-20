@@ -84,13 +84,13 @@ public class StudentTableEx2 extends JFrame implements ActionListener {
 		panel.setPopupMenu(createPopupMenu());
 	}
 	
-	public Student getStudent() {
-		return pStudent.getItem();
-	}
-	
-	public void setStudent(Student student) {
-		pStudent.setItem(student);
-	}
+//	public Student getStudent() {
+//		return pStudent.getItem();
+//	}
+//	
+//	public void setStudent(Student student) {
+//		pStudent.setItem(student);
+//	}
 	
 	private JPopupMenu createPopupMenu() {
 		JPopupMenu popMenu = new JPopupMenu();
@@ -103,23 +103,24 @@ public class StudentTableEx2 extends JFrame implements ActionListener {
 		deleteItem.addActionListener(myPopMenuListenr);
 		popMenu.add(deleteItem);
 		
+		JMenuItem getSelectItem = new JMenuItem("선택한 학생 확인");
+		getSelectItem.addActionListener(myPopMenuListenr);
+		popMenu.add(getSelectItem);
+		
 		return popMenu;
 	}
 	
 	ActionListener myPopMenuListenr = new ActionListener() {
-		
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			if(e.getActionCommand().equals("수정")) {
 				try {
 					Student selItem = panel.getSelectedItem();
-					
-//					pStudent.setItem(std.get(selIdx));
+					pStudent.setItem(selItem);
 					btnAdd.setText("수정");
 				} catch (RuntimeException e1) {
 					JOptionPane.showMessageDialog(null, "선택된 학생이 없습니다.");
 				}
-				
 			}
 			if(e.getActionCommand().equals("삭제")) {
 				try {
@@ -127,10 +128,18 @@ public class StudentTableEx2 extends JFrame implements ActionListener {
 				} catch (RuntimeException e1) {
 					JOptionPane.showMessageDialog(null, "선택된 학생이 없습니다.");
 				}
-				
+			}
+			if(e.getActionCommand().equals("선택한 학생 확인")) {
+				try {
+					Student selectedStd = panel.getSelectedItem();
+					JOptionPane.showMessageDialog(null, selectedStd);
+				} catch (RuntimeException e1) {
+					JOptionPane.showMessageDialog(null, "선택된 학생이 없습니다");
+				}
 			}
 		}
 	};
+	
 	private StudentTblPanel panel;
 	
 	public void actionPerformed(ActionEvent e) {
@@ -143,27 +152,19 @@ public class StudentTableEx2 extends JFrame implements ActionListener {
 	}
 	
 	protected void btnAddActionPerformed(ActionEvent e) {
-//		try {
-//			if(btnAdd.getText().equals("추가")) {			
-//				Student newStr = pStudent.getItem();
-//				std.add(newStr);
-//				list.setListData(new Vector<Student>(std));
-//				pStudent.clearTf();
-//			}
-//			
-//			if(btnAdd.getText().equals("수정")) {		
-//				int selIdx = list.getSelectedIndex();
-//				Student newStr = pStudent.getItem();
-//				std.remove(selIdx);
-//				std.add(selIdx, newStr);
-//				list.setListData(new Vector<Student>(std));
-//				btnAdd.setText("추가");
-//				pStudent.clearTf();
-//			}
-//			
-//		} catch (NumberFormatException e1) {
-//			JOptionPane.showMessageDialog(null, "정보를 입력해주세요.");
-//		}
+		if(btnAdd.getText().equals("추가")) {			
+			Student newStr = pStudent.getItem();
+			panel.addItem(newStr);
+			pStudent.clearTf();
+		}
+		
+		if(btnAdd.getText().equals("수정")) {		
+			Student newStr = pStudent.getItem();
+			int idx = panel.getSelectedRowIdx();
+			panel.updateRow(newStr, idx);
+			btnAdd.setText("추가");
+			pStudent.clearTf();
+		}
 	}
 	
 	protected void btnCancleActionPerformed(ActionEvent e) {
