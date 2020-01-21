@@ -11,29 +11,29 @@ import javax.swing.JButton;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import java.awt.event.ActionListener;
-import java.util.ArrayList;
 import java.awt.event.ActionEvent;
 import javax.swing.BoxLayout;
 import java.awt.CardLayout;
 import java.awt.GridLayout;
 import javax.swing.JLabel;
 
-public class StudentFrame extends JFrame implements ActionListener {
+public class StudentFrame_01 extends JFrame implements ActionListener {
 
 	private JPanel contentPane;
 	private JPanel panel02;
-	private StudentTblPanel panel03;
+	private JPanel panel03;
 	private JButton btnAdd;
 	private JButton btnCancel;
+	private JScrollPane scrollPane;
+	private JTextArea textArea;
 	private JPanel panel01;
 	private StudentPanel pStudent;
-	private ArrayList<Student> stds;
 
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					StudentFrame frame = new StudentFrame();
+					StudentFrame_01 frame = new StudentFrame_01();
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -42,7 +42,7 @@ public class StudentFrame extends JFrame implements ActionListener {
 		});
 	}
 
-	public StudentFrame() {
+	public StudentFrame_01() {
 		initialize();
 	}
 	private void initialize() {
@@ -70,16 +70,15 @@ public class StudentFrame extends JFrame implements ActionListener {
 		btnCancel.addActionListener(this);
 		panel02.add(btnCancel);
 		
-		panel03 = new StudentTblPanel();
+		panel03 = new JPanel();
 		contentPane.add(panel03);
+		panel03.setLayout(new BorderLayout(0, 0));
 		
-		stds = new ArrayList<Student>();
-		stds.add(new Student(1, "서현진", 80, 90, 70));
-		stds.add(new Student(2, "이성경", 90, 90, 40));
-		stds.add(new Student(3, "이유영", 50, 50, 60));
+		scrollPane = new JScrollPane();
+		panel03.add(scrollPane, BorderLayout.CENTER);
 		
-		panel03.loadData(stds);
-//		panel03.setLayout(new BorderLayout(0, 0));
+		textArea = new JTextArea();
+		scrollPane.setViewportView(textArea);
 		
 
 	}
@@ -93,8 +92,8 @@ public class StudentFrame extends JFrame implements ActionListener {
 		}
 	}
 	protected void btnAddActionPerformed(ActionEvent e) {
-//		Student std = pStudent.getItem();
-//		textArea.append(std.toString()+"\n");
+		Student std = pStudent.getItem();
+		textArea.append(std.toString()+"\n");
 		pStudent.clearTf();
 	}
 	protected void btnCancelActionPerformed(ActionEvent e) {

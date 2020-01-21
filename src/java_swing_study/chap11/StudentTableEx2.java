@@ -2,28 +2,21 @@ package java_swing_study.chap11;
 
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.util.ArrayList;
 
+import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JMenuItem;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JPopupMenu;
 import javax.swing.border.EmptyBorder;
 
 import java_swing_study.chap11.exam.Student;
-
-import javax.swing.JScrollPane;
-import javax.swing.JList;
-import javax.swing.JMenuItem;
-import javax.swing.JOptionPane;
-import javax.swing.JLabel;
-import javax.swing.JTextField;
-import javax.swing.JButton;
-import java.awt.event.ActionListener;
-import java.util.ArrayList;
-import java.util.Vector;
-import java.awt.event.ActionEvent;
 import java_swing_study.chap11.exam.StudentPanel;
-import javax.swing.JTable;
-import javax.swing.table.DefaultTableModel;
+import java_swing_study.chap11.exam.StudentTblPanel_Test2;
 
 public class StudentTableEx2 extends JFrame implements ActionListener {
 
@@ -33,6 +26,8 @@ public class StudentTableEx2 extends JFrame implements ActionListener {
 	private JPanel pBtns;
 	private JButton btnAdd;
 	private JButton btnCancle;
+	private StudentTblPanel_Test2 panel;
+	private ArrayList<Student> stds;
 		
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
@@ -48,7 +43,13 @@ public class StudentTableEx2 extends JFrame implements ActionListener {
 	}
 
 	public StudentTableEx2() {
+		stds = new ArrayList<Student>();
+		stds.add(new Student(1, "서현진", 80, 90, 70));
+		stds.add(new Student(2, "이성경", 90, 90, 40));
+		stds.add(new Student(3, "이유영", 50, 50, 60));
+		
 		initialize();
+		panel.loadData(stds);
 	}
 
 	private void initialize() {
@@ -67,7 +68,7 @@ public class StudentTableEx2 extends JFrame implements ActionListener {
 		contentPane.add(pList, BorderLayout.CENTER);
 		pList.setLayout(new BorderLayout(0, 0));
 		
-		panel = new StudentTblPanel();
+		panel = new StudentTblPanel_Test2();
 		pList.add(panel, BorderLayout.CENTER);
 		
 		pBtns = new JPanel();
@@ -116,17 +117,18 @@ public class StudentTableEx2 extends JFrame implements ActionListener {
 			if(e.getActionCommand().equals("수정")) {
 				try {
 					Student selItem = panel.getSelectedItem();
+					idx = panel.getSelectedRowIdx();
 					pStudent.setItem(selItem);
 					btnAdd.setText("수정");
 				} catch (RuntimeException e1) {
-					JOptionPane.showMessageDialog(null, "선택된 학생이 없습니다.");
+					JOptionPane.showMessageDialog(null, e1.getMessage());
 				}
 			}
 			if(e.getActionCommand().equals("삭제")) {
 				try {
 					panel.removeRow();
 				} catch (RuntimeException e1) {
-					JOptionPane.showMessageDialog(null, "선택된 학생이 없습니다.");
+					JOptionPane.showMessageDialog(null, e1.getMessage());
 				}
 			}
 			if(e.getActionCommand().equals("선택한 학생 확인")) {
@@ -134,37 +136,40 @@ public class StudentTableEx2 extends JFrame implements ActionListener {
 					Student selectedStd = panel.getSelectedItem();
 					JOptionPane.showMessageDialog(null, selectedStd);
 				} catch (RuntimeException e1) {
-					JOptionPane.showMessageDialog(null, "선택된 학생이 없습니다");
+					JOptionPane.showMessageDialog(null, e1.getMessage());
 				}
 			}
 		}
 	};
+	private int idx;
 	
-	private StudentTblPanel panel;
-	
+
 	public void actionPerformed(ActionEvent e) {
 		if (e.getSource() == btnCancle) {
 			btnCancleActionPerformed(e);
 		}
 		if (e.getSource() == btnAdd) {
-			btnAddActionPerformed(e);
+			if(e.getActionCommand().equals("추가")) {				
+				btnAddActionPerformed(e);
+			} else {
+				btnUpdateActionPerformed(e);
+			}
 		}
 	}
 	
+	private void btnUpdateActionPerformed(ActionEvent e) {
+		Student updateStd = pStudent.getItem();
+		stds.set(stds.indexOf(updateStd), updateStd); //Database적용
+		panel.updateRow(updateStd, idx);
+		btnAdd.setText("추가");
+		pStudent.clearTf();
+	}
+
 	protected void btnAddActionPerformed(ActionEvent e) {
-		if(btnAdd.getText().equals("추가")) {			
-			Student newStr = pStudent.getItem();
-			panel.addItem(newStr);
-			pStudent.clearTf();
-		}
-		
-		if(btnAdd.getText().equals("수정")) {		
-			Student newStr = pStudent.getItem();
-			int idx = panel.getSelectedRowIdx();
-			panel.updateRow(newStr, idx);
-			btnAdd.setText("추가");
-			pStudent.clearTf();
-		}
+		Student newStr = pStudent.getItem();
+		stds.add(newStr); //Database에 insert
+		panel.addItem(newStr);
+		pStudent.clearTf();
 	}
 	
 	protected void btnCancleActionPerformed(ActionEvent e) {

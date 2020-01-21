@@ -1,4 +1,4 @@
-package java_swing_study.chap11;
+package java_swing_study.chap11.exam;
 
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -22,19 +22,16 @@ import javax.swing.table.TableCellRenderer;
 import javax.swing.table.TableColumnModel;
 import javax.swing.table.TableModel;
 import javax.swing.table.TableRowSorter;
-
-import java_swing_study.chap11.exam.Student;
-
 import javax.swing.ListSelectionModel;
 import javax.swing.RowSorter;
 import javax.swing.SwingConstants;
 
-public class StudentTblPanel extends JPanel {
+public class StudentTblPanel_Test1 extends JPanel {
 	private JScrollPane scrollPane;
 	private JTable table;
 	private NotEditableModel model;
 
-	public StudentTblPanel() {
+	public StudentTblPanel_Test1() {
 
 		initialize();
 	}
@@ -57,12 +54,12 @@ public class StudentTblPanel extends JPanel {
 //		));
 
 		// 외부에서 호출
-		ArrayList<Student> stds = new ArrayList<Student>();
-		stds.add(new Student(1, "서현진", 80, 90, 70));
-		stds.add(new Student(2, "이성경", 90, 90, 40));
-		stds.add(new Student(3, "이유영", 50, 50, 60));
+//		ArrayList<Student> stds = new ArrayList<Student>();
+//		stds.add(new Student(1, "서현진", 80, 90, 70));
+//		stds.add(new Student(2, "이성경", 90, 90, 40));
+//		stds.add(new Student(3, "이유영", 50, 50, 60));
 		//new Student(stdNo, stdName, kor, math, eng)
-		loadData(stds);
+//		loadData(stds);
 		
 	}
 
@@ -71,7 +68,7 @@ public class StudentTblPanel extends JPanel {
 		table.setComponentPopupMenu(popupMenu);
 	}
 
-	private void loadData(ArrayList<Student> stds) {
+	public void loadData(ArrayList<Student> stds) {
 //		table.setModel(new DefaultTableModel(getRows(stds), getColNames())); // (데이터, 컬럼명); // 메소드로 뺀다.
 		
 		model = new NotEditableModel(getRows(stds), getColNames());
@@ -238,7 +235,7 @@ public class StudentTblPanel extends JPanel {
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.setBounds(10, 10, 450, 500);
 		
-		StudentTblPanel tbl = new StudentTblPanel();
+		StudentTblPanel_Test1 tbl = new StudentTblPanel_Test1();
 		frame.add(tbl);
 		frame.setVisible(true);
 		
