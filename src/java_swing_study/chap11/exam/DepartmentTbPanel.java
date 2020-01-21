@@ -21,20 +21,28 @@ public class DepartmentTbPanel extends AbstractTblPanel<Department> {
 
 	@Override
 	protected Object[] toArray(Department item) {
-		// TODO Auto-generated method stub
-		return null;
+		return new Object[] {
+				String.format("%02d", item.getDeptNo()),
+				item.getDeptName(),
+				item.getFloor()
+		};
 	}
 
 	@Override
-	public void updateRow(Department time, int updateIdx) {
-		// TODO Auto-generated method stub
-		
+	public void updateRow(Department item, int updateIdx) {
+		model.setValueAt(String.format("%02d", item.getDeptNo()), updateIdx, 0);
+		model.setValueAt(item.getDeptName(), updateIdx, 1);
+		model.setValueAt(item.getFloor(), updateIdx, 2);
 	}
 
 	@Override
 	public Department getSelectedItem() {
-		// TODO Auto-generated method stub
-		return null;
+		int selectedIdx = getSelectedRowIdx();
+		int deptNo = Integer.parseInt((String)model.getValueAt(selectedIdx, 0));
+		String deptName = (String)model.getValueAt(selectedIdx, 1);
+		int floor = (int)model.getValueAt(selectedIdx, 2);
+		
+		return new Department(deptNo, deptName, floor);
 	}
 
 }

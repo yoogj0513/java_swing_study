@@ -18,8 +18,8 @@ import javax.swing.table.TableRowSorter;
 @SuppressWarnings("serial")
 public abstract class AbstractTblPanel<T> extends JPanel {
 	private JScrollPane scrollPane;
-	private JTable table;
-	private NotEditableModel model;
+	protected JTable table;
+	protected NotEditableModel model;
 
 	public AbstractTblPanel() {
 		initialize();
