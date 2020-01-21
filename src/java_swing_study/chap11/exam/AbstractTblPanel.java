@@ -99,7 +99,7 @@ public abstract class AbstractTblPanel<T> extends JPanel {
 	public int getSelectedRowIdx() {
 		int selectedIdx = table.getSelectedRow();
 		if (selectedIdx == -1) {
-			throw new RuntimeException("해당 학생을 선택하세요");
+			throw new RuntimeException("해당 항목을 선택하세요");
 		}
 		return selectedIdx;
 	}
