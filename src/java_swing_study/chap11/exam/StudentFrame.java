@@ -6,6 +6,7 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.JPopupMenu;
 import javax.swing.border.EmptyBorder;
 import javax.swing.JButton;
 import javax.swing.JScrollPane;
@@ -17,17 +18,19 @@ import javax.swing.BoxLayout;
 import java.awt.CardLayout;
 import java.awt.GridLayout;
 import javax.swing.JLabel;
+import javax.swing.JMenuItem;
 
 public class StudentFrame extends JFrame implements ActionListener {
 
 	private JPanel contentPane;
-	private JPanel panel02;
-	private StudentTblPanel panel03;
+	private JPanel pBtn;
+	private StudentTblPanel pStdTb;
 	private JButton btnAdd;
 	private JButton btnCancel;
-	private JPanel panel01;
+	private JPanel pStd;
 	private StudentPanel pStudent;
 	private ArrayList<Student> stds;
+	private int selCol;
 
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
@@ -46,6 +49,7 @@ public class StudentFrame extends JFrame implements ActionListener {
 		initialize();
 	}
 	private void initialize() {
+		setTitle("StudentFrame");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 488);
 		contentPane = new JPanel();
@@ -53,48 +57,102 @@ public class StudentFrame extends JFrame implements ActionListener {
 		setContentPane(contentPane);
 		contentPane.setLayout(new BoxLayout(contentPane, BoxLayout.Y_AXIS));
 		
-		panel01 = new JPanel();
-		contentPane.add(panel01);
-		panel01.setLayout(new BorderLayout(0, 0));
+		pStd = new JPanel();
+		contentPane.add(pStd);
+		pStd.setLayout(new BorderLayout(0, 0));
 		
 		pStudent = new StudentPanel();
-		panel01.add(pStudent, BorderLayout.CENTER);
-		panel02 = new JPanel();
-		contentPane.add(panel02);
+		pStd.add(pStudent, BorderLayout.CENTER);
+		pBtn = new JPanel();
+		contentPane.add(pBtn);
 		
 		btnAdd = new JButton("추가");
 		btnAdd.addActionListener(this);
-		panel02.add(btnAdd);
+		pBtn.add(btnAdd);
 		
 		btnCancel = new JButton("취소");
 		btnCancel.addActionListener(this);
-		panel02.add(btnCancel);
+		pBtn.add(btnCancel);
 		
-		panel03 = new StudentTblPanel();
-		contentPane.add(panel03);
+		pStdTb = new StudentTblPanel();
+		contentPane.add(pStdTb);
 		
 		stds = new ArrayList<Student>();
 		stds.add(new Student(1, "서현진", 80, 90, 70));
 		stds.add(new Student(2, "이성경", 90, 90, 40));
 		stds.add(new Student(3, "이유영", 50, 50, 60));
 		
-		panel03.loadData(stds);
+		pStdTb.loadData(stds);
 //		panel03.setLayout(new BorderLayout(0, 0));
 		
-
+		pStdTb.setPopupMenu(createPopupMenu());
 	}
+
+	private JPopupMenu createPopupMenu() {
+		JPopupMenu popMenu = new JPopupMenu();
+		
+		JMenuItem updateItem = new JMenuItem("수정");
+		updateItem.addActionListener(myPopMenuListener);
+		popMenu.add(updateItem);
+		
+		JMenuItem deleteItem = new JMenuItem("삭제");
+		deleteItem.addActionListener(myPopMenuListener);
+		popMenu.add(deleteItem);
+
+		return popMenu;
+	}
+	
+	ActionListener myPopMenuListener = new ActionListener() {
+		
+		
+
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			if(e.getActionCommand().equals("수정")) {
+				try {
+					pStudent.setItem(pStdTb.getSelectedItem());
+					selCol = pStdTb.getSelectedRowIdx();
+					btnAdd.setText("수정");
+				} catch (RuntimeException e1) {
+					JOptionPane.showMessageDialog(null, e1.getMessage());
+				}
+			}
+			if(e.getActionCommand().equals("삭제")) {
+				try {					
+					pStdTb.removeRow();
+				} catch (RuntimeException e1) {
+					JOptionPane.showMessageDialog(null, e1.getMessage());
+				}
+			}
+		}
+	};
 
 	public void actionPerformed(ActionEvent e) {
 		if (e.getSource() == btnCancel) {
 			btnCancelActionPerformed(e);
 		}
 		if (e.getSource() == btnAdd) {
-			btnAddActionPerformed(e);
+			if(e.getActionCommand().equals("수정")) {
+				btnUpdateActionPerformed(e);
+			} else {				
+				btnAddActionPerformed(e);
+			}
 		}
 	}
+	private void btnUpdateActionPerformed(ActionEvent e) {
+		Student item = pStudent.getItem();
+		pStdTb.updateRow(item, selCol);
+		stds.set(selCol, item);
+		btnAdd.setText("추가");
+		pStudent.clearTf();
+	}
+
 	protected void btnAddActionPerformed(ActionEvent e) {
-//		Student std = pStudent.getItem();
+		Student std = pStudent.getItem();
 //		textArea.append(std.toString()+"\n");
+		pStdTb.addItem(std);
+		stds.add(std);
+		
 		pStudent.clearTf();
 	}
 	protected void btnCancelActionPerformed(ActionEvent e) {

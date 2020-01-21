@@ -52,8 +52,8 @@ public class StudentTblPanel extends AbstractTblPanel_Test<Student> {
 		int stdNo = Integer.parseInt((String)model.getValueAt(selectedIdx, 0));
 		String stdName = (String) model.getValueAt(selectedIdx, 1);
 		int kor = (int) model.getValueAt(selectedIdx, 2);
-		int math = (int) model.getValueAt(selectedIdx, 3);
-		int eng = (int) model.getValueAt(selectedIdx, 4);
+		int eng = (int) model.getValueAt(selectedIdx, 3);
+		int math = (int) model.getValueAt(selectedIdx, 4);
 		return new Student(stdNo, stdName, kor, math, eng);
 	}
 
