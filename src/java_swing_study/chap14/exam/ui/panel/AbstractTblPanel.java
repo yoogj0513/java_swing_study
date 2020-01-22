@@ -43,7 +43,7 @@ public abstract class AbstractTblPanel<T> extends JPanel {
 	}
 	
 	public void loadData(ArrayList<T> items) {
-		model = new NotEditableModel(getRows(items),	getColNames());
+		model = new NotEditableModel(getRows(items), getColNames());
 		table.setModel(model);
 
 		setTblWidthAlign();

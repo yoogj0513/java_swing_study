@@ -81,7 +81,7 @@ public class StudentFrame extends JFrame implements ActionListener {
 		stds.add(new Student(1, "서현진", 80, 90, 70));
 		stds.add(new Student(2, "이성경", 90, 90, 40));
 		stds.add(new Student(3, "이유영", 50, 50, 60));
-		
+//		
 		pStdTb.loadData(stds);
 //		panel03.setLayout(new BorderLayout(0, 0));
 		
@@ -104,8 +104,6 @@ public class StudentFrame extends JFrame implements ActionListener {
 	
 	ActionListener myPopMenuListener = new ActionListener() {
 		
-		
-
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			if(e.getActionCommand().equals("수정")) {

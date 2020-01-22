@@ -6,7 +6,8 @@ import javax.swing.JLabel;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 import javax.swing.border.TitledBorder;
-import java_swing_study.chap11.exam.Student;
+
+import java_swing_study.chap14.exam.dto.Student;
 
 public class StudentPanel extends AbsItemPanel<Student> {
 	private JLabel lblStdNo;
