@@ -11,10 +11,12 @@ import java_swing_study.chap14.exam.ui.panel.DepartmentPanel;
 import java_swing_study.chap14.exam.ui.panel.DepartmentTblPanel;
 import javax.swing.JButton;
 import javax.swing.JMenuItem;
+import javax.swing.JOptionPane;
 
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
+@SuppressWarnings("serial")
 public class DepartmentMainPanel extends JPanel implements ActionListener {
 	private JPanel pDeptInput;
 	private JPanel pBtn;
@@ -81,13 +83,21 @@ public class DepartmentMainPanel extends JPanel implements ActionListener {
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			if(e.getActionCommand().equals("수정")) {
-				Department item = pDeptTbl.getSelectedItem();
-				pDept.setItem(item);
-				selRow = pDeptTbl.getSelectedRowIdx();
-				btnAdd.setText("수정");
+				try {					
+					Department item = pDeptTbl.getSelectedItem();
+					pDept.setItem(item);
+					selRow = pDeptTbl.getSelectedRowIdx();
+					btnAdd.setText("수정");
+				} catch (RuntimeException e1) {
+					JOptionPane.showMessageDialog(null, e1.getMessage());
+				}
 			}
 			if(e.getActionCommand().equals("삭제")) {
-				pDeptTbl.removeRow();
+				try {					
+					pDeptTbl.removeRow();
+				} catch (RuntimeException e1) {
+					JOptionPane.showMessageDialog(null, e1.getMessage());
+				}
 			}
 		}
 	};
@@ -114,14 +124,18 @@ public class DepartmentMainPanel extends JPanel implements ActionListener {
 	}
 
 	protected void btnCancelActionPerformed(ActionEvent e) {
-		Department item = pDept.getItem();
-		pDeptTbl.addItem(item);
-		depts.add(item);
 		pDept.clearTf();
+		btnAdd.setText("추가");
 	}
 
 	protected void btnAddActionPerformed(ActionEvent e) {
-		pDept.clearTf();
-		btnAdd.setText("추가");
+		try {			
+			Department item = pDept.getItem();
+			pDeptTbl.addItem(item);
+			depts.add(item);
+			pDept.clearTf();
+		} catch (NumberFormatException e1) {
+			JOptionPane.showMessageDialog(this, "정보를 입력해주세요.");
+		}
 	}
 }

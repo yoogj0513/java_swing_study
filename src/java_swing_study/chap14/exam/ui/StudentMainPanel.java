@@ -9,12 +9,14 @@ import java_swing_study.chap14.exam.dto.Student;
 import java_swing_study.chap14.exam.ui.panel.StudentPanel;
 import javax.swing.JButton;
 import javax.swing.JMenuItem;
+import javax.swing.JOptionPane;
 
 import java_swing_study.chap14.exam.ui.panel.StudentTblPanel;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.awt.event.ActionEvent;
 
+@SuppressWarnings("serial")
 public class StudentMainPanel extends JPanel implements ActionListener {
 	private JPanel pStdInput;
 	private JPanel pBtn;
@@ -82,13 +84,22 @@ public class StudentMainPanel extends JPanel implements ActionListener {
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			if(e.getActionCommand() == "수정") {
-				Student item = pStdTbl.getSelectedItem();
-				pStd.setItem(item);
-				selRow = pStdTbl.getSelectedRowIdx();
-				btnAdd.setText("수정");
+				try {
+					Student item = pStdTbl.getSelectedItem();
+					pStd.setItem(item);
+					selRow = pStdTbl.getSelectedRowIdx();
+					btnAdd.setText("수정");
+				} catch (RuntimeException e1) {
+					JOptionPane.showMessageDialog(null, e1.getMessage());
+				}
+				
 			}
 			if(e.getActionCommand() == "삭제") {
-				
+				try {					
+					pStdTbl.removeRow();
+				} catch (RuntimeException e1) {
+					JOptionPane.showMessageDialog(null, e1.getMessage());
+				}
 			}
 		}
 	};
@@ -115,10 +126,14 @@ public class StudentMainPanel extends JPanel implements ActionListener {
 	}
 
 	protected void btnAddActionPerformed(ActionEvent e) {
-		Student item = pStd.getItem();
-		pStdTbl.addItem(item);
-		stds.add(item);
-		pStd.clearTf();
+		try {			
+			Student item = pStd.getItem();
+			pStdTbl.addItem(item);
+			stds.add(item);
+			pStd.clearTf();
+		} catch (NumberFormatException e1) {
+			JOptionPane.showMessageDialog(this, "정보를 입력하주세요.");
+		}
 	}
 
 	protected void btnCancelActionPerformed(ActionEvent e) {

@@ -1,10 +1,10 @@
 package java_swing_study.chap14.exam.ui.panel;
 
-import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 
 import java_swing_study.chap14.exam.dto.Student;
 
+@SuppressWarnings("serial")
 public class StudentTblPanel extends AbstractTblPanel<Student> {
 	
 	public StudentTblPanel() {
