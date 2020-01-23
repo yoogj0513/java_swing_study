@@ -23,6 +23,7 @@ public class StudentMainPanel extends JPanel implements ActionListener {
 	private JButton btnAdd;
 	private JButton btnCancel;
 	private ArrayList<Student> stds;
+	private int selRow;
 
 	public StudentMainPanel() {
 
@@ -53,6 +54,7 @@ public class StudentMainPanel extends JPanel implements ActionListener {
 //		pStdTbl.setLayout(new BorderLayout(0, 0));
 		
 		stds = new ArrayList<Student>();
+		stds.add(new Student(1, "이성경", 90, 80, 70));
 		pStdTbl.loadData(stds);
 
 		pStdTbl.setPopupMenu(createPopupMenu());
@@ -80,7 +82,10 @@ public class StudentMainPanel extends JPanel implements ActionListener {
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			if(e.getActionCommand() == "수정") {
-				
+				Student item = pStdTbl.getSelectedItem();
+				pStd.setItem(item);
+				selRow = pStdTbl.getSelectedRowIdx();
+				btnAdd.setText("수정");
 			}
 			if(e.getActionCommand() == "삭제") {
 				
@@ -93,14 +98,26 @@ public class StudentMainPanel extends JPanel implements ActionListener {
 			btnCancelActionPerformed(e);
 		}
 		if (e.getSource() == btnAdd) {
-			btnAddActionPerformed(e);
+			if(e.getActionCommand().equals("수정")) {
+				btnUpdateActionPerformed(e);
+			} else {				
+				btnAddActionPerformed(e);
+			}
 		}
+	}
+
+	private void btnUpdateActionPerformed(ActionEvent e) {
+		Student item = pStd.getItem();
+		pStdTbl.updateRow(item, selRow);
+		stds.set(selRow, item);
+		pStd.clearTf();
+		btnAdd.setText("추가");
 	}
 
 	protected void btnAddActionPerformed(ActionEvent e) {
 		Student item = pStd.getItem();
-		System.out.println(item);
-//		pStdTbl.addItem(item);
+		pStdTbl.addItem(item);
+		stds.add(item);
 		pStd.clearTf();
 	}
 
